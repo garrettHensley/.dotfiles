@@ -3,13 +3,7 @@
 return {
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	
-	{ 
-		"nvim-treesitter/nvim-treesitter", 
-		build = ":TSUpdate", 
-		highlight = {
-			enable = true
-		}
-	}, 
+
 	{
 		'nvimdev/dashboard-nvim',
 		 event = 'VimEnter',
