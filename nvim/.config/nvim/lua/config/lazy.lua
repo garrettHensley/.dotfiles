@@ -31,8 +31,9 @@ require("lazy").setup({
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "habamax" } },
-	{"nvim-treesitter/nvim-treesitter", build = "TSUpdate"},
+  -- install = { colorscheme = { "habamax" } },
+  	install = { colorscheme = { 'kepano/flexoki-neovim', name = 'flexoki'} },
+	 {"nvim-treesitter/nvim-treesitter", branch= "master", lazy = false, build = "TSUpdate"},
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
