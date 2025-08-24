@@ -3,7 +3,7 @@
     // MAIN BAR //
 
     "layer": "top",
-    "position": "top",
+    "position": "bottom",
     "name": "first",
 
     "modules-left": [
@@ -12,7 +12,6 @@
       "custom/spacer2",
       "hyprland/workspaces",
       "custom/spacer2",
-      "custom/spacer3",
       "hyprland/submap",
       "hyprland/window",
     ],
@@ -21,7 +20,6 @@
       "cpu",
       "disk",
       "network#info",
-      "image",
       "pulseaudio#output",
       "clock",
     ],
@@ -33,12 +31,6 @@
       "tooltip": "{}",
       "tooltip-format": "Free {free}",
     },
-
-    "image": {
-      "path": "/home/garrett/Pictures/dumb_rice/wallpapers/girls-beach.png",
-      "size": 100,
-    },
-
     "clock": {
       "interval": 10,
       "format": "   {:%I:%M %p}",
@@ -170,11 +162,6 @@
       "format": " ",
       "tooltip": false,
     },
-
-    "custom/spacer3": {
-      "format": "/",
-      "tooltip": false,
-    },
   },
 
   {
@@ -184,8 +171,6 @@
     "position": "top",
     "name": "second",
     "width": 2304,
-
-    "modules-left": ["battery"],
 
     "modules-right": ["hyprland/submap"],
 

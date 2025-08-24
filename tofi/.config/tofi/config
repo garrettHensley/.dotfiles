@@ -13,10 +13,10 @@
 	# characters not in the chosen font will fail to render.
 	#
 	# Otherwise, fonts are interpreted in Pango format.
-	font = "Iosevka"
+	font = "MS Sans Serif"
 
 	# Point size of text.
-	font-size = 24
+	font-size = 16 
 
 	# Comma separated list of OpenType font feature settings to apply,
 	# if supported by the chosen font. The format is similar to the CSS
@@ -50,7 +50,7 @@
 	# Default text color
 	#
 	# All text defaults to this color if not otherwise specified.
-	text-color = #BAC2DE
+	text-color = #000000
 
 	# All pieces of text have the same theming attributes available:
 	#
@@ -69,7 +69,7 @@
 
 	# Prompt text theme
 	# prompt-color = #FFFFFF
-	prompt-background = #1E1E2E
+	#prompt-background = #1E1E2E
 	prompt-background-padding = 0
 	prompt-background-corner-radius = 0
 
@@ -97,13 +97,13 @@
 	# default-result-* attribute.
 	#
 	# alternate-result-color = #FFFFFF
-	alternate-result-background = #181825
+#	alternate-result-background = #181825
 	# alternate-result-background-padding = 0
 	# alternate-result-background-corner-radius = 0
 
 	# Selection text
-	selection-color = #74C7EC
-	selection-background = #00000000
+	selection-color = #000080
+	selection-background = #808080
 	selection-background-padding = 0
 	selection-background-corner-radius = 0
 
@@ -148,7 +148,7 @@
 	prompt-padding = 0
 
 	# Placeholder input text.
-	placeholder-text = ""
+	placeholder-text = "Linux 95"
 
 	# Maximum number of results to display.
 	# If 0, tofi will draw as many results as it can fit in the window.
@@ -171,7 +171,7 @@
 	height = 720
 
 	# Window background color
-	background-color = #1E1E2E
+	background-color = #C0C0C0
 
 	# Width of the border outlines in pixels.
 	outline-width = 2
@@ -183,10 +183,10 @@
 	border-width = 2
 
 	# Border color
-	border-color = #F38BA8
+	border-color = #808080
 
 	# Radius of window corners in pixels.
-	corner-radius = 38
+	corner-radius = 0 
 
 	# Padding between borders and text. Can be pixels or a percentage.
 	padding-top = 12
@@ -213,7 +213,7 @@
 	#
 	# Supported values: top-left, top, top-right, right, bottom-right,
 	# bottom, bottom-left, left, center.
-	anchor = center
+	anchor = bottom-left 
 
 	# Set the size of the exclusive zone.
 	#

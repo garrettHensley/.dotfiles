@@ -1,6 +1,9 @@
 @define-color black #11111b;
 
 @define-color darkgrey #181825;
+
+@define-color grey #c3c3c3;
+
 @define-color white	   #cdd6f4;
 @define-color warning  #FF7070;
 @define-color indigo1  #89b4fa;
@@ -45,26 +48,36 @@
   }
 }
 
+#waybar {
+  background: @grey;
+  font-family: Times New Roman;
+  padding-right: 4px;
+  padding-left: 4px;
+}
 /* The Main bar */
 #waybar.first {
-  background: @indigo2;
-  color: @yellow;
-  font-family: Iosevka Nerd Font;
+  background: @grey;
+  color: @black;
   font-size: 12pt;
   font-weight: bold;
 }
 
+#window {
+  padding-right: 4px;
+  padding-left: 4px;
+  box-shadow: inset 0 -3px transparent;
+  border: 1px solid #000000;
+}
+
 #waybar.first button {
-  font-family: JetBrains Mono Nerd Font;
   font-size: 12pt;
   font-weight: bold;
   transition: all 0.15s ease-in-out;
 }
 
 .modules-right {
-  border-radius: 10px;
-  background: @teal;
   color: @black;
+  box-shadow: inset 0 -3px #000000;
 }
 
 #cpu,
@@ -74,10 +87,6 @@
 #clock {
   padding-left: 10px;
   padding-right: 10px;
-}
-
-#image {
-  min-width: 100px;
 }
 
 #waybar.first #network.info.wifi.normal,
@@ -96,14 +105,13 @@
 
 /* Default workspace settings */
 #waybar.first #workspaces button {
-  color: @darkgrey;
   background: transparent;
+  border: 1px #000000;
   font-size: 18px;
   padding-left: 3pt;
   padding-right: 3pt;
   padding-top: 1pt;
   padding-bottom: 1pt;
-  border-radius: 20px;
   margin-bottom: 3px;
   margin-top: 3px;
   margin-left: 3px;
@@ -114,7 +122,7 @@
 /* Inactive (on unfocused output) & Active (on focused output) */
 #waybar.first #workspaces button.visible {
   color: @darkgrey;
-  background: @pink;
+  border: 1px solid #000000;
 }
 
 /* Style when cursor is on the button */
@@ -145,7 +153,6 @@ tooltip {
 #waybar.second {
   font-size: 2px; /* This makes indicator thicker */
   color: rgba(0, 0, 0, 0);
-  background: @indigo1;
 }
 
 /* For margins, use your monitor's h.resolution, */
