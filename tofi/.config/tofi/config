@@ -13,7 +13,7 @@
 	# characters not in the chosen font will fail to render.
 	#
 	# Otherwise, fonts are interpreted in Pango format.
-	font = "MS Sans Serif"
+	font = "Times New Roman"
 
 	# Point size of text.
 	font-size = 16 
@@ -68,14 +68,15 @@
 	#     Radius of background box corners in pixels
 
 	# Prompt text theme
-	# prompt-color = #FFFFFF
-	#prompt-background = #1E1E2E
-	prompt-background-padding = 0
+  prompt-text="Programs"
+	prompt-color = #FFFFFF
+	prompt-background = #394dcd
+	prompt-background-padding = 2
 	prompt-background-corner-radius = 0
 
 	# Placeholder text theme
-	placeholder-color = #FFFFFFA8
-	placeholder-background = #00000000
+	placeholder-color = #FFFFFF
+	placeholder-background = #394dcd 
 	placeholder-background-padding = 0
 	placeholder-background-corner-radius = 0
 
@@ -148,7 +149,7 @@
 	prompt-padding = 0
 
 	# Placeholder input text.
-	placeholder-text = "Linux 95"
+	placeholder-text = ""
 
 	# Maximum number of results to display.
 	# If 0, tofi will draw as many results as it can fit in the window.
@@ -167,7 +168,7 @@
 ### Window theming
 #
 	# Width and height of the window. Can be pixels or a percentage.
-	width = 700
+	width = 400
 	height = 720
 
 	# Window background color
