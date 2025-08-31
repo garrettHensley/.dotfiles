@@ -6,3 +6,6 @@ default rice
 
 #### aqua
 chill mode rice, minimal UI, max relax
+
+#### windoze
+windows 95 rice WIP
