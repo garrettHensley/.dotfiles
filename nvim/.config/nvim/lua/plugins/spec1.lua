@@ -1,4 +1,17 @@
 return {
+	{
+		"folke/which-key.nvim",
+			event = "VeryLazy",
+			keys = {
+				{
+				"<leader>?",
+				function()
+					require("which-key").show({ global = false })
+				end,
+				desc = "Local Keymaps",
+			}
+		}
+	},
     {
         'kepano/flexoki-neovim',
         name = 'flexoki',
@@ -22,67 +35,16 @@ return {
                 -- config
                 theme = 'hyper',
                 config = {
-                    header = ascii.cat
+                    header = ascii.cat,
+		    center = {
+			    {
+				    desc = 'Welcome hax0r',
+				    action = "Telescope app"
+			    }
+		    },
                 }
             }
         end,
         dependencies = { { 'nvim-tree/nvim-web-devicons' } }
-    },
-    { 'nvim-telescope/telescope.nvim', tag = '0.1.5', dependencies = { 'nvim-lua/plenary.nvim' } },
-    -- LSP Config
-    {
-        "neovim/nvim-lspconfig",
-        event = { "BufReadPre", "BufNewFile" },
-        config = function()
-            require("lspconfig").rust_analyzer.setup({})
-        end,
-    },
-
-    -- Autocomplete
-    {
-        "hrsh7th/nvim-cmp",
-        dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
-            "L3MON4D3/LuaSnip",
-            "saadparwaiz1/cmp_luasnip",
-        },
-        event = "InsertEnter",
-        config = function()
-            local cmp = require("cmp")
-            cmp.setup({
-                snippet = {
-                    expand = function(args)
-                        require("luasnip").lsp_expand(args.body)
-                    end,
-                },
-                sources = {
-                    { name = "nvim_lsp" },
-                    { name = "luasnip" },
-                },
-                mapping = cmp.mapping.preset.insert({
-                    ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-                }),
-            })
-        end,
-    },
-
-    -- Telescope
-    {
-        "nvim-telescope/telescope.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        cmd = "Telescope",
-        keys = {
-            { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-            { "<leader>fg", "<cmd>Telescope live_grep<cr>",  desc = "Live Grep" },
-        },
-    },
-
-    -- Which Key
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("which-key").setup()
-        end,
     },
 }
