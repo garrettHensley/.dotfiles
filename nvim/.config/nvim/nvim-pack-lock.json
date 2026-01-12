@@ -1,0 +1,12 @@
+{
+  "plugins": {
+    "fzf-lua": {
+      "rev": "940ffbfb54842b1b2bdd7aacc35db998a952b616",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
+    "oil.nvim": {
+      "rev": "81b8a91735ad5cd24a6b3137f14a89f19176364f",
+      "src": "https://github.com/stevearc/oil.nvim"
+    }
+  }
+}

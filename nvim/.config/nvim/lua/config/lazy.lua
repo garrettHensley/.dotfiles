@@ -21,8 +21,33 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+
+-- Works best with completeopt=noselect.
+-- Use CTRL-Y to select an item. |complete_CTRL-Y|
+
+-- LSP STUFF BELOW
+vim.cmd[[set completeopt+=popup]]
+vim.lsp.start({
+  name = 'ts_ls',
+  cmd = …,
+  on_attach = function(client, bufnr)
+    vim.lsp.completion.enable(true, client.id, bufnr, {
+      autotrigger = true,
+      convert = function(item)
+        return { abbr = item.label:gsub('%b()', '') }
+      end,
+    })
+  end,
+})
+
+
+vim.lsp.inlay_hint.enable()
 -- language server?
 vim.lsp.enable('luals')
+vim.lsp.enable('rustls')
+vim.lsp.enable('qmlls')
+vim.cmd([[colorscheme sorbet]])
+
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -32,9 +57,11 @@ require("lazy").setup({
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
-  -- install = { colorscheme = { "habamax" } },
-  	install = { colorscheme = { 'kepano/flexoki-neovim', name = 'flexoki'} },
-	 {"nvim-treesitter/nvim-treesitter", branch= "master", lazy = false, build = "TSUpdate"},
+  	-- install = { colorscheme = { 'kepano/flexoki-neovim', name = 'flexoki'} },
+	 {
+     "nvim-treesitter/nvim-treesitter", branch= "master", lazy = false, build = "TSUpdate"
+   },
   -- automatically check for plugin updates
-  checker = { enabled = true },
+  checker = { enabled = false },
 })
+
