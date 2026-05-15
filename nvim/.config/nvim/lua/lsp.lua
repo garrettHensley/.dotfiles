@@ -1,7 +1,6 @@
 vim.cmd[[set completeopt+=noselect]]
 
 vim.api.nvim_create_autocmd('LspAttach', {
-  pattern = '*.cs',
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if not client then return end
@@ -20,3 +19,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
     set('n', '<leader>dd', vim.diagnostic.open_float, { buffer = true, desc = "Diagnostic detail" })
   end,
 })
+
+vim.lsp.config('lua_ls', {
+  cmd = { 'lua-language-server' },
+  filetypes = { 'lua' },
+  root_markers = { '.luarc.json', '.luarc.jsonc', '.git' },
+  settings = {
+    Lua = {
+      runtime = { version = 'LuaJIT' },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file('', true),
+        checkThirdParty = false,
+      },
+      diagnostics = { globals = { 'vim' } },
+    },
+  },
+})
+
+vim.lsp.enable('lua_ls')
