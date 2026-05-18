@@ -64,7 +64,7 @@ local raycast       = "vicinae"
 local browser       = "zen-browser"
 local notifications = "swaync-client"
 local screenshot    = "hyprshot"
-local statusbar     = "ashell" -- waybar
+statusbar           = "ashell" -- waybar
 
 
 -------------------
@@ -214,7 +214,7 @@ hl.config({
 ---- KEYBINDINGS ----
 ---------------------
 
-local mainMod = "SUPER"
+mainMod = "SUPER"
 
 hl.bind(mainMod .. " + F12", hl.dsp.exec_cmd("~/.config/hypr/scrips/bt.sh"))
 hl.bind(mainMod .. " + Q",   hl.dsp.exec_cmd(terminal))
@@ -326,3 +326,10 @@ hl.window_rule({
     float  = true,
     center = true,
 })
+
+
+---------------------
+---- PLUGINS --------
+---------------------
+
+dofile("~/.config/hypr/plugins/gamemode.lua")
