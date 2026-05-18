@@ -45,12 +45,12 @@ hl.monitor({
     max_avg_luminance   = 200,
 })
 
-hl.config({
-    render = {
-        cm_fs_passthrough = true,
-        cm_auto_hdr       = true,
-    },
-})
+-- hl.config({
+--     render = {
+--         cm_fs_passthrough = true,
+--         cm_auto_hdr       = true,
+--     },
+-- })
 
 
 ---------------------
@@ -141,7 +141,7 @@ hl.config({
     },
 
     dwindle = {
-        pseudotile     = true,
+        -- pseudotile     = true,
         preserve_split = true,
     },
 
