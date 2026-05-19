@@ -28,6 +28,7 @@ hl.monitor({
 
 -- DP-1: HDR / wide-gamut monitor. These extended keys are translated from
 -- the old `monitorv2` block and need to be checked against the wiki.
+-- MAIN MFING MONITOR
 hl.monitor({
     output              = "DP-1",
     mode                = "3440x1440@164.90",
@@ -36,6 +37,7 @@ hl.monitor({
     supports_wide_color = true,
     supports_hdr        = true,
     bitdepth            = 10,
+    cm                  = "auto", -- "auto",
     sdrbrightness       = 1.15,
     sdrsaturation       = 1,
     sdr_min_luminance   = 0.005,
@@ -231,7 +233,6 @@ hl.bind(mainMod .. " + R",   hl.dsp.exec_cmd(menu .. " | xargs hyprctl dispatch 
 hl.bind(mainMod .. " + D",   hl.dsp.exec_cmd("vesktop"))
 
 -- Scripts (from keybinds.conf)
-hl.bind(mainMod .. " + F1", hl.dsp.exec_cmd("~/.config/hypr/scrips/modes.fish"))
 hl.bind(mainMod .. " + F2", hl.dsp.exec_cmd("~/.config/hypr/scrips/focus.fish"))
 
 -- Move focus (vim keys)
@@ -276,8 +277,8 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Media / volume / brightness
 hl.bind(mainMod .. " + F13",     hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioRaiseVolume",  hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume",  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
+-- hl.bind("XF86AudioRaiseVolume",  hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
+-- hl.bind("XF86AudioLowerVolume",  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
 hl.bind("XF86AudioMute",         hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
 hl.bind("XF86AudioMicMute",      hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl s 10%+"),                          { locked = true, repeating = true })
@@ -328,8 +329,40 @@ hl.window_rule({
 })
 
 
----------------------
----- PLUGINS --------
----------------------
+-------------------
+---- GAME MODE ----
+-------------------
 
-dofile("~/.config/hypr/plugins/gamemode.lua")
+local gameMode = false
+
+local function toggleGameMode()
+    gameMode = not gameMode
+
+    if gameMode then
+        hl.config({
+            general = {
+                gaps_in     = 0,
+                gaps_out    = 0,
+                border_size = 0,
+            },
+            decoration = {
+                rounding = 0,
+            },
+        })
+        hl.exec_cmd("killall " .. statusbar)
+    else
+        hl.config({
+            general = {
+                gaps_in     = 5,
+                gaps_out    = 16,
+                border_size = 0,
+            },
+            decoration = {
+                rounding = 10,
+            },
+        })
+        hl.exec_cmd(statusbar)
+    end
+end
+
+hl.bind(mainMod .. " + F1", toggleGameMode)
