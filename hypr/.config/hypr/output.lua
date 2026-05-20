@@ -1,0 +1,399 @@
+
+-- monitor=DP-1,3440x1440@164.90,1080x0,1, bitdepth, 10#, cm, hdr, sdrbrightness, 1.5, sdrsaturation, 0.98
+hl.monitor({
+    output   = "HDMI-A-1",
+    mode     = "1920x1080@60",
+    position = "0x0",
+    scale    = 1,
+    transform = 1,
+})
+
+hl.monitor({
+    output = "DP-1",
+    mode = "3440x1440@164.90",
+    position = "1080x0",
+    scale = 1,
+    -- cm = hdr
+    supports_wide_color = 1,
+    supports_hdr = 1,
+    bitdepth = 10,
+    sdrbrightness = 1.15,
+    sdrsaturation = 1,
+    sdr_min_luminance = 0.005,
+    sdr_max_luminance = 200,
+    min_luminance = 0,
+    max_luminance = 1000,
+    max_avg_luminance = 200,
+})
+
+hl.config({
+    render = {
+        cm_fs_passthrough = 1,
+        cm_auto_hdr = 1,
+    },
+})
+
+--##################
+--## MY PROGRAMS ###
+--##################
+
+-- See https://wiki.hyprland.org/Configuring/Keywords/
+
+-- Set programs that you use
+local terminal = "ghostty"
+local fileManager = terminal .. " -e yazi"
+local menu = "tofi-drun"
+local raycast = "vicinae"
+local browser = "zen-browser"
+local notifications = "swaync-client"
+local screenshot = "hyprshot"
+local statusbar = "ashell"
+--################
+--## AUTOSTART ###
+--################
+
+-- Autostart necessary processes (like notifications daemons, status bars, etc.)
+-- Or execute your favorite apps at launch like this:
+
+-- exec-once = $terminal
+-- exec-once = nm-applet &
+-- exec-once = waybar & hyprpaper & firefox
+
+
+--############################
+--## ENVIRONMENT VARIABLES ###
+--############################
+
+-- See https://wiki.hyprland.org/Configuring/Environment-variables/
+
+hl.env("XCURSOR_SIZE", "24")
+hl.env("HYPRCURSOR_SIZE", "24")
+
+
+--####################
+--## LOOK AND FEEL ###
+--####################
+
+-- Refer to https://wiki.hyprland.org/Configuring/Variables/
+
+-- https://wiki.hyprland.org/Configuring/Variables/#general
+hl.config({
+    general = {
+        gaps_in = 5,
+        gaps_out = 16,
+
+        border_size = 0,
+
+        -- https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
+        -- col.active_border = rgb(028fff)
+        col = {
+            inactive_border = "rgba(595959aa)",
+        },
+
+        -- Set to true enable resizing windows by clicking and dragging on borders and gaps
+        resize_on_border = false,
+
+        -- Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
+        allow_tearing = false,
+
+        layout = "dwindle",
+    },
+
+    -- https://wiki.hyprland.org/Configuring/Variables/#decoration
+    decoration = {
+        rounding = 10,
+        rounding_power = 5,
+
+        -- Change transparency of focused and unfocused windows
+        active_opacity = 1.0,
+        inactive_opacity = 1.0,
+
+        shadow = {
+            enabled = true,
+            range = 9,
+            render_power = 9,
+            color = "rgba(1a1a1aee)",
+        },
+
+        -- https://wiki.hyprland.org/Configuring/Variables/#blur
+        blur = {
+            enabled = true,
+            size = 3,
+            passes = 6,
+            vibrancy = 0.1696,
+        },
+    },
+
+    -- https://wiki.hyprland.org/Configuring/Variables/#animations
+    animations = {
+        enabled = true,
+
+        -- Default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
+
+
+    },
+})
+hl.curve("easeOutQuint", { type = "bezier", points = { {0.23, 1}, {0.32, 1} } })
+hl.curve("easeInOutCubic", { type = "bezier", points = { {0.65, 0.05}, {0.36, 1} } })
+hl.curve("linear", { type = "bezier", points = { {0, 0}, {1, 1} } })
+hl.curve("almostLinear", { type = "bezier", points = { {0.5, 0.5}, {0.75, 1.0} } })
+hl.curve("quick", { type = "bezier", points = { {0.15, 0}, {0.1, 1} } })
+hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
+hl.animation({ leaf = "border", enabled = true, speed = 9.39, bezier = "easeOutQuint" })
+hl.animation({ leaf = "windows", enabled = true, speed = 4.79, bezier = "easeOutQuint", style = "slide" })
+hl.animation({ leaf = "windowsIn", enabled = true, speed = 4.1, bezier = "easeOutQuint", style = "slide" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 1.49, bezier = "linear", style = "popin 87%" })
+hl.animation({ leaf = "fadeIn", enabled = true, speed = 1.73, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeOut", enabled = true, speed = 1.46, bezier = "almostLinear" })
+hl.animation({ leaf = "fade", enabled = true, speed = 3.03, bezier = "quick" })
+hl.animation({ leaf = "layers", enabled = true, speed = 3.81, bezier = "easeOutQuint" })
+hl.animation({ leaf = "layersIn", enabled = true, speed = 4, bezier = "easeOutQuint", style = "fade" })
+hl.animation({ leaf = "layersOut", enabled = true, speed = 1.5, bezier = "linear", style = "fade" })
+hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 1.79, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "almostLinear" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 1.94, bezier = "almostLinear", style = "slide" })
+hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "almostLinear", style = "slide" })
+hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "slide" })
+
+-- Ref https://wiki.hyprland.org/Configuring/Workspace-Rules/
+-- "Smart gaps" / "No gaps when only"
+-- uncomment all if you wish to use that.
+-- workspace = w[tv1], gapsout:0, gapsin:0
+-- workspace = f[1], gapsout:0, gapsin:0
+-- windowrule = bordersize 0, floating:0, onworkspace:w[tv1]
+-- windowrule = rounding 0, floating:0, onworkspace:w[tv1]
+-- windowrule = bordersize 0, floating:0, onworkspace:f[1]
+-- windowrule = rounding 0, floating:0, onworkspace:f[1]
+
+
+--###########
+-- CUSTOM WORK SPACES #
+--###########
+hl.workspace_rule({ workspace = "special:dockpanel" })
+hl.workspace_rule({ workspace = "s[true]", gaps_out = 130, gaps_in = 130 })
+-- windowrule = opacity 0.9, floating: 0, onworkspace:s[true]
+
+-- See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
+hl.config({
+    dwindle = {
+        pseudotile = true,
+        preserve_split = true,
+    },
+
+
+    --#always_center_master = true, orientation = center, mfact = 0.34
+
+    -- See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
+    master = {
+        new_status = "master",
+
+    },
+
+    -- https://wiki.hyprland.org/Configuring/Variables/#misc
+    misc = {
+        force_default_wallpaper = -1,
+        disable_hyprland_logo = false,
+    },
+
+
+
+    --############
+    --## INPUT ###
+    --############
+
+    -- https://wiki.hyprland.org/Configuring/Variables/#input
+    input = {
+        kb_layout = "us",
+        kb_variant = "",
+        kb_model = "",
+        kb_options = "",
+        kb_rules = "",
+        --scroll_factor = 5.0
+        follow_mouse = 1,
+
+        sensitivity = -1.0,
+
+        touchpad = {
+            natural_scroll = false,
+        },
+    },
+})
+
+-- https://wiki.hyprland.org/Configuring/Variables/#gestures
+
+-- Example per-device config
+-- See https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs for more
+
+
+
+--##################
+--## KEYBINDINGS ###
+--##################
+
+-- See https://wiki.hyprland.org/Configuring/Keywords/
+local mainMod = "SUPER"
+
+-- Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
+hl.bind(mainMod .. " + F12", hl.dsp.exec_cmd("$HOME/.config/hypr/scrips/bt.sh"))
+
+hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + C", hl.dsp.window.close())
+hl.bind(mainMod .. " + M", hl.dsp.exit())
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
+hl.bind(mainMod .. " + down", hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(browser))
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(notifications .. " -t -sw"))
+hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("obsidian"))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu .. " | xargs hyprctl dispatch exec --"))
+
+-- Move focus with mainMod + arrow keys
+hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
+
+
+-- Switch workspaces with mainMod + [0-9]
+hl.bind(mainMod .. " + 1", hl.dsp.focus({ workspace = 1 }))
+hl.bind(mainMod .. " + 2", hl.dsp.focus({ workspace = 2 }))
+hl.bind(mainMod .. " + 3", hl.dsp.focus({ workspace = 3 }))
+hl.bind(mainMod .. " + 4", hl.dsp.focus({ workspace = 4 }))
+hl.bind(mainMod .. " + 5", hl.dsp.focus({ workspace = 5 }))
+hl.bind(mainMod .. " + 6", hl.dsp.focus({ workspace = 6 }))
+hl.bind(mainMod .. " + 7", hl.dsp.focus({ workspace = 7 }))
+hl.bind(mainMod .. " + 8", hl.dsp.focus({ workspace = 8 }))
+hl.bind(mainMod .. " + 9", hl.dsp.focus({ workspace = 9 }))
+hl.bind(mainMod .. " + 0", hl.dsp.focus({ workspace = 10 }))
+
+-- Move active window to a workspace with mainMod + SHIFT + [0-9]
+hl.bind(mainMod .. " + SHIFT + 1", hl.dsp.window.move({ workspace = 1 }))
+hl.bind(mainMod .. " + SHIFT + 2", hl.dsp.window.move({ workspace = 2 }))
+hl.bind(mainMod .. " + SHIFT + 3", hl.dsp.window.move({ workspace = 3 }))
+hl.bind(mainMod .. " + SHIFT + 4", hl.dsp.window.move({ workspace = 4 }))
+hl.bind(mainMod .. " + SHIFT + 5", hl.dsp.window.move({ workspace = 5 }))
+hl.bind(mainMod .. " + SHIFT + 6", hl.dsp.window.move({ workspace = 6 }))
+hl.bind(mainMod .. " + SHIFT + 7", hl.dsp.window.move({ workspace = 7 }))
+hl.bind(mainMod .. " + SHIFT + 8", hl.dsp.window.move({ workspace = 8 }))
+hl.bind(mainMod .. " + SHIFT + 9", hl.dsp.window.move({ workspace = 9 }))
+hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = 10 }))
+
+-- MOVE WINDOW CUSTOM
+hl.bind("SUPER + SHIFT + H", hl.dsp.window.move({ direction = "left" }))
+hl.bind("SUPER + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
+hl.bind("SUPER + SHIFT + K", hl.dsp.window.move({ direction = "up" }))
+hl.bind("SUPER + SHIFT + J", hl.dsp.window.move({ direction = "down" }))
+
+-- CUSTOM APP LAUNCH
+hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("vesktop"))
+hl.bind(mainMod .. " + 0", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprshot -m region --clipboard-only"))
+hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd("hyprshot -m region"))
+
+-- Example special workspace (scratchpad)
+hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+
+-- Scroll through existing workspaces with mainMod + scroll
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+
+-- Move/resize windows with mainMod + LMB/RMB and dragging
+hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
+hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+
+-- Laptop multimedia keys for volume and LCD brightness
+-- Random controls - volume Volume Music Player player music
+hl.bind(mainMod .. " + F13", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true, repeating = true })
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true, repeating = true })
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl s 10%+"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 10%-"), { locked = true, repeating = true })
+
+-- Requires playerctl
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+
+--#############################
+--## WINDOWS AND WORKSPACES ###
+--#############################
+
+-- See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
+-- See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
+
+-- Example windowrule
+-- windowrule = float,class:^(kitty)$,title:^(kitty)$
+
+-- Ignore maximize requests from apps. You'll probably like this.
+-- windowrule = suppressevent maximize, class:.*
+
+-- Fix some dragging issues with XWayland
+-- windowrule = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
+
+
+-- custom plugins
+hl.on("hyprland.start", function()
+    hl.exec_cmd(statusbar)
+    hl.exec_cmd("steam")
+    hl.exec_cmd("hyprpaper")
+    -- exec-once = hypridle
+    hl.exec_cmd("swaync")
+    hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+    hl.exec_cmd("vicinae server")
+    hl.exec_cmd("wl-paste --type text --watch cliphist store")
+    hl.exec_cmd("wl-paste --type image --watch cliphist store")
+end)
+
+-- CUSTOM WINDOW RULES
+--windowrule = opacity 0.8,class:kitty
+-- windowrule = opacity 0.8,class:^(ghostty)$
+-- windowrule = opacity 0.95,class:jetbrains-rider
+--windowrule = tile, class:godot
+--windowrule = float,class:\bSmall Game idea\b
+-- windowrule = float, title:Swim-dumb (DEBUG)
+
+-- source: ./keybinds.conf
+
+hl.window_rule({
+    name  = "discord",
+    match = { class = "^GPaper$" },
+    opacity = 0.3,
+    float = true,
+    tile = false,
+})
+
+hl.window_rule({
+    name  = "ghostty-opacity",
+    match = { class = "^com\\.mitchellh\\.ghostty$" },
+    -- opacity = 0.9
+    no_blur = true,
+})
+
+hl.window_rule({
+    name  = "pip",
+    match = { title = "^Picture-in-Picture$" },
+    float = true,
+    pin = true,
+})
+
+-- GODOT DEBUG
+hl.window_rule({
+    name  = "temple-game",
+    match = { class = "^3drogue$" },
+    float = true,
+    center = true,
+})
+
+hl.window_rule({
+    name  = "ambulance-game",
+    match = { class = "^paramedics-w-guns$" },
+    float = true,
+    center = true,
+})
+
+
